@@ -1,3 +1,5 @@
+*The bot is still in development, the functionality has not yet been added*
+
 # PitsundaCheckBot
 This is a telegram bot that can determine what is in the picture: a cat or a dog
 
