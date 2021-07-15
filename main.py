@@ -2,7 +2,7 @@ from telebot import *
 
 with open(".env", "r") as f:
     TOKEN = f.read()
-print(TOKEN)
+
 bot = TeleBot(TOKEN)
 
 
@@ -17,7 +17,8 @@ def echo_all(message):
 
 
 def main():
-    bot.polling()
+    # bot.polling()
+    bot.infinity_polling()
 
 
 if __name__ == '__main__':
