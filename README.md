@@ -3,7 +3,7 @@ This is a telegram bot that can determine what is in the picture: a cat or a dog
 
 Sourse: t.me/PitsundaCheckBot
 
-![Alt Text](https://s6.gifyu.com/images/bot_demonstration.gif)
+![Alt Text](https://s6.gifyu.com/images/bot_demo.gif)
 
 ### FAQ
 1. The bot recognized the image incorrectly, why?
