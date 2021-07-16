@@ -12,29 +12,27 @@ class Dogs_vs_Cats:
     def __init__(self, path, img_size):
         self.path = path
         self.img_size = img_size  # 224
+        self.res_sub_aug_map = ImageDataGenerator(preprocessing_function=preprocess_input)
 
     @staticmethod
     def load_model(directory):
         """ Loading and compiling saved pre-trained model """
-        json_file = open(directory + "amazing_cnn.json", "r")  # "C://Users/Rauf/Desktop/v3/amazing_cnn.json"
+        json_file = open(directory + "amazing_cnn.json", "r")
         loaded_model_json = json_file.read()
         json_file.close()
         loaded_model = model_from_json(loaded_model_json)
-        loaded_model.load_weights(directory + "amazing_cnn_w.h5")  # "C://Users/Rauf/Desktop/v3/amazing_cnn_w.h5"
+        loaded_model.load_weights(directory + "amazing_cnn_w.h5")
         loaded_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
         return loaded_model
 
-    def predict(self, directory):
+    def predict(self, directory, filename):
         """ Making prediction with loaded pre-trained model """
-        x_test_img_name = [file for file in os.listdir(directory)]
-        print([file for file in os.listdir(directory)])
+        # img_names = [file for file in os.listdir(directory)]
+        img_names = [filename]
+        submission_image_df = pd.DataFrame({'filename': img_names})
 
-        submission_image_df = pd.DataFrame({'filename': x_test_img_name})
-
-        res_sub_aug_map = ImageDataGenerator(preprocessing_function=preprocess_input)
-
-        res_sub_data = res_sub_aug_map.flow_from_dataframe(
+        res_sub_data = self.res_sub_aug_map.flow_from_dataframe(
             submission_image_df, directory,
             x_col="filename",
             y_col=None,
@@ -50,4 +48,13 @@ class Dogs_vs_Cats:
 
     @staticmethod
     def clear_data():
-        pass
+        """ Deleting already used photos """
+        folder = 'data/'
+        for file in os.listdir(folder):
+            file_path = os.path.join(folder, file)
+            try:
+                if os.path.isfile(file_path):
+                    os.unlink(file_path)
+                    print("Old data has been removed")
+            except Exception as e:
+                print(e)

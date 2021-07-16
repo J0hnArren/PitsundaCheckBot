@@ -1,3 +1,6 @@
 .idea/*
 
 .env
+
+package/amazing_cnn.json
+package/amazing_cnn_w.h5
