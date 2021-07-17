@@ -26,6 +26,8 @@ def send_welcome(message):
                                       "Send me a photo with a cat or a dog and I will guess who is in the photo.",
                      reply_markup=keyboard())
 
+    Dogs_vs_Cats.clear_data()
+
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
@@ -75,7 +77,6 @@ def handle_picture(message):
         else:
             bot.reply_to(message, "This is a cat")
 
-        Dogs_vs_Cats.clear_data()
     except ConnectTimeout as e:
         print(e)
         bot.reply_to(message, "Something went wrong with connection. Try again")
